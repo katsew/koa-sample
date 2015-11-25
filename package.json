@@ -1,0 +1,28 @@
+{
+  "name": "koa-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./app/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 start ./processes.json"
+  },
+  "author": "katsew",
+  "license": "MIT",
+  "dependencies": {
+    "co-views": "^2.1.0",
+    "jade": "^1.11.0",
+    "koa": "^1.1.2",
+    "koa-bodyparser": "^2.0.1",
+    "koa-generic-session": "^1.10.0",
+    "koa-redis": "^1.0.1",
+    "koa-route": "^2.4.2",
+    "koa-router": "^6.0.0",
+    "koa-static": "^1.5.2",
+    "mongoose": "^4.2.7",
+    "nodemailer": "^1.10.0",
+    "nodemailer-smtp-transport": "^1.0.4",
+    "pm2": "^0.15.10",
+    "uuid": "^2.0.1"
+  }
+}
