@@ -1,0 +1,8 @@
+.DS_Store
+*.rdb
+*.log
+
+node_modules/
+data/
+log/
+pids/
