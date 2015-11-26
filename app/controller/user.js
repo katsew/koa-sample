@@ -88,6 +88,18 @@ exports.login = function *(next) {
     };
     result = yield UserModel.find(query);
     if (result.length < 1) {
+      let result = yield UserModel.find({ mail: mail });
+      if (result.length > 0) {
+        console.log('--- password incorrect ---');
+        this.body = yield render("index.jade", {
+          error: {
+            type: "login",
+            text: "パスワードが違います"
+          }
+        });
+        return false;
+      }
+      console.log('--- no result found ---');
       return this.response.redirect("/");
     }
   } catch (e) {

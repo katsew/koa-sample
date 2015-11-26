@@ -26,6 +26,8 @@ html(lang='ja')
           input(type="submit" value="新規登録")
 
         h4 ログイン
+        if error && error.type === "login"
+          p #{error.text}
         form(action="/user/login" method="POST")
           label メールアドレス
           input(type="email" name="mail")
