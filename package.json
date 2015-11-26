@@ -21,7 +21,6 @@
     "koa-static": "^1.5.2",
     "mongoose": "^4.2.7",
     "nodemailer": "^1.10.0",
-    "nodemailer-smtp-transport": "^1.0.4",
     "pm2": "^0.15.10",
     "uuid": "^2.0.1"
   }
