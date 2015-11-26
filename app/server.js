@@ -6,6 +6,7 @@ const serve = require('./lib/serve');
 const router = require('./lib/router');
 const session = require('./lib/session');
 const bodyParser = require('koa-bodyparser');
+const cors = require('koa-cors');
 
 // Initialize and registar middleware.
 app.keys = ["koa-session-cookie"];
@@ -17,10 +18,11 @@ app.on("error", function (err, ctx) {
 });
 
 app
+  .use(cors())
   .use(serve)
   .use(bodyParser())
   .use(session);
 
 // Add routing and boot.
 router(app);
-app.listen(constants.PORT);
+app.listen(constants.PORT, "localhost");
