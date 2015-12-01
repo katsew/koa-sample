@@ -161,6 +161,32 @@ exports.showCurrentUser = function *(next) {
 }
 
 exports.logout = function *(next) {
+
+  if (this.session.user == null) {
+    this.response.status = 400;
+    return this.body = jsonify({
+      status: 400,
+      text: "すでにログアウトしています"
+    });
+  }
   this.session = null;
-  this.response.redirect("/");
+  return this.body = jsonify({
+    status: 200,
+    text: "ログアウト成功"
+  });
+}
+
+exports.check_auth = function *(next) {
+  let hasSession = this.session != null && this.session.user != null;
+  if (hasSession) {
+    return this.body = jsonify({
+      status: 200,
+      text: "認証成功"
+    });
+  }
+  this.response.status = 400;
+  this.body = jsonify({
+    status: 400,
+    text: "認証失敗"
+  });
 }

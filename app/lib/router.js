@@ -22,6 +22,7 @@ const router = function(app) {
   app.use(route.get(`/api/${API_VERSION}/u/r`, api.showCurrentUser));
   app.use(route.post(`/api/${API_VERSION}/login`, api.login));
   app.use(route.get(`/api/${API_VERSION}/logout`, api.logout));
+  app.use(route.get(`/api/${API_VERSION}/check_auth`, api.check_auth));
 };
 
 module.exports = router;

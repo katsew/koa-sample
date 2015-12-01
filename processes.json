@@ -14,7 +14,7 @@
       "MONGO_HOST": "localhost",
       "MONGO_PORT": "27017"
     },
-    "ignore_watch": ["node_modules", "log", "assets", "pids", "\.git\/"],
+    "ignore_watch": ["node_modules", "log", "assets", "pids", "\.git\/", "test", "package.json"],
     "watch_options": {
       "usePolling": false
     },

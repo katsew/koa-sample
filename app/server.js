@@ -1,6 +1,6 @@
 // "use strict";
 
-const app = require('koa')();
+const app = module.exports = require('koa')();
 const constants = require('./lib/constants');
 const serve = require('./lib/serve');
 const router = require('./lib/router');
@@ -25,4 +25,5 @@ app
 
 // Add routing and boot.
 router(app);
-app.listen(constants.PORT, "localhost");
+
+app.listen(constants.PORT);
