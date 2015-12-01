@@ -176,7 +176,7 @@ exports.logout = function *(next) {
   });
 }
 
-exports.check_auth = function *(next) {
+exports.checkAuth = function *(next) {
   let hasSession = this.session != null && this.session.user != null;
   if (hasSession) {
     return this.body = jsonify({
