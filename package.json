@@ -4,7 +4,7 @@
   "description": "",
   "main": "./app/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./test/**/*.js",
     "start": "pm2 start ./processes.json"
   },
   "author": "katsew",
@@ -24,5 +24,9 @@
     "nodemailer": "^1.10.0",
     "pm2": "^0.15.10",
     "uuid": "^2.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4",
+    "supertest": "^1.1.0"
   }
 }
