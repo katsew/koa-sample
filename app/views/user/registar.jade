@@ -7,6 +7,9 @@ html(lang='ja')
     body
       h1 Please enter the password
       form(action="/u/c" method="POST")
+        label ユーザー名
+        input(type="text" name="name")
+        br
         label パスワード
         input(type="password" name="password")
         br

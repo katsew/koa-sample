@@ -4,6 +4,7 @@ const render = require(`${__dirname}/../lib/render`);
 const Mailer = require(`${__dirname}/../service/mail`);
 const uuid = require('uuid');
 const UserModel = require(`${__dirname}/../model/user`);
+const auth = require('../lib/auth.js');
 
 exports.showSignupPage = function *(next) {
   console.log('--- front page ---');
@@ -50,6 +51,7 @@ exports.registar = function *(next) {
 exports.createNewUser = function *(next) {
   console.log(this.request.body);
   console.log("create new user processes");
+  let name = this.request.body.name;
   let password = this.request.body.password;
   let confirm = this.request.body.confirm;
   if (password !== confirm) {
@@ -59,6 +61,7 @@ exports.createNewUser = function *(next) {
   let result = null;
   try {
     let newUser = new UserModel({
+      name: name,
       mail: this.session.mail,
       password: password
     });
@@ -76,40 +79,23 @@ exports.createNewUser = function *(next) {
 
 exports.login = function *(next) {
   console.log('--- login challenge ---');
-  console.log(this.request.body);
-  let mail = this.request.body.mail;
-  let password = this.request.body.password;
-  let result = null;
-
+  let self = this;
   try {
-    let query = {
-      mail: mail,
-      password: password
-    };
-    result = yield UserModel.find(query);
-    if (result.length < 1) {
-      let result = yield UserModel.find({ mail: mail });
-      if (result.length > 0) {
-        console.log('--- password incorrect ---');
-        this.body = yield render("index.jade", {
-          error: {
-            type: "login",
-            text: "パスワードが違います"
-          }
-        });
-        return false;
+    yield auth.authenticate('local', function *(err, result) {
+      console.log('--- authenticate callback ---');
+      console.log(err);
+      console.log(result);
+      if (err || result === false) {
+        return self.response.redirect("/");
       }
-      console.log('--- no result found ---');
-      return this.response.redirect("/");
-    }
+      console.log(self.session);
+      console.log(self.request.user);
+      return self.response.redirect("/u/r");
+    });
   } catch (e) {
-    console.error(e);
-    return this.response.redirect("/");
+    console.log(e);
+    this.response.redirect("/");
   }
-  console.log('--- success find user ---');
-  console.log(result);
-  this.session.user = result[0].mail;
-  return this.response.redirect("/u/r");
 }
 
 exports.showCurrentUser = function *(next) {

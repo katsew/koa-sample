@@ -29,8 +29,8 @@ html(lang='ja')
         if error && error.type === "login"
           p #{error.text}
         form(action="/user/login" method="POST")
-          label メールアドレス
-          input(type="email" name="mail")
+          label ユーザ名
+          input(type="text" name="name")
           br
           label パスワード
           input(type="password" name="password")

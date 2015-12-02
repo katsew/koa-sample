@@ -8,5 +8,7 @@ module.exports = session({
   genSid() {
     return uuid.v4();
   },
-  store: redisStore()
+  store: redisStore(),
+  ttl: 86400000,
+  rolling: false
 });

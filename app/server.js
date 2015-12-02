@@ -1,29 +1,35 @@
 // "use strict";
 
-const app = module.exports = require('koa')();
+const Koa = require('koa');
+const app = module.exports = new Koa();
 const constants = require('./lib/constants');
 const serve = require('./lib/serve');
 const router = require('./lib/router');
 const session = require('./lib/session');
 const bodyParser = require('koa-bodyparser');
-const cors = require('koa-cors');
+const cors = require('kcors');
+const passport = require('./lib/auth.js').passport;
+const convert = require('koa-convert');
+const co = require('co');
 
 // Initialize and registar middleware.
 app.keys = ["koa-session-cookie"];
 app.name = "koa-server";
-
+// app.proxy = true;
 app.on("error", function (err, ctx) {
   console.log(err);
   console.log(ctx);
 });
 
 app
-  .use(cors())
-  .use(serve)
+  .use(convert(cors({
+    origin: "*"
+  })))
+  .use(convert(serve))
   .use(bodyParser())
-  .use(session);
-
-// Add routing and boot.
-router(app);
-
-app.listen(constants.PORT);
+  .use(convert(session))
+  .use(passport.initialize())
+  .use(passport.session())
+  .use(router.routes())
+  .use(router.allowedMethods())
+  .listen(constants.PORT);

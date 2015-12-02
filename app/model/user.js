@@ -38,5 +38,9 @@ const UserSchema = new mongoose.Schema({
   }
 }, {collection: "users"});
 
+UserSchema.methods.verifyPassword = function(password) {
+  return this.password === password;
+};
+
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

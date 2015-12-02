@@ -4,7 +4,7 @@ const app = require('../../app/server.js');
 const API_VERSION = "v1";
 const API_ENDPOINT = `/api/${API_VERSION}`;
 const request = require('supertest').agent(app.listen());
-const FIXTURE_MAIL = "mlkato.sandbox@gmail.com";
+const FIXTURE_NAME = "testuser";
 const FIXTURE_PASSWORD = "password";
 
 describe('POST /login with created user', () => {
@@ -12,7 +12,7 @@ describe('POST /login with created user', () => {
     request
       .post(`${API_ENDPOINT}/login`)
       .send({
-        mail: FIXTURE_MAIL,
+        name: FIXTURE_NAME,
         password: FIXTURE_PASSWORD
       })
       .expect(200, done);
@@ -25,7 +25,7 @@ describe('POST /login with not created user', () => {
     request
       .post(`${API_ENDPOINT}/login`)
       .send({
-        mail: "abc@def.ghi",
+        name: "abc@def.ghi",
         password: "1234567890"
       })
       .expect(400, done);
@@ -37,7 +37,7 @@ describe('GET /logout with auth', () => {
     request
       .post(`${API_ENDPOINT}/login`)
       .send({
-        mail: FIXTURE_MAIL,
+        name: FIXTURE_NAME,
         password: FIXTURE_PASSWORD
       })
       .expect(200, (err, res) => {
@@ -72,7 +72,7 @@ describe('GET /auth_check with auth', () => {
     request
       .post(`${API_ENDPOINT}/login`)
       .send({
-        mail: FIXTURE_MAIL,
+        name: FIXTURE_NAME,
         password: FIXTURE_PASSWORD
       })
       .expect(200, (err, res) => {
