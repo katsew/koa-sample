@@ -3,7 +3,6 @@
 const passport = require('koa-passport');
 const Strategy = require('passport-local').Strategy;
 const User = require('../model/user.js');
-// const jwt = require('jsonwebtoken');
 const jwtSign = require('koa-jwt').sign;
 const jwtVerify = require('koa-jwt').verify;
 const secret = require('../lib/constants.js').TOKEN_SECRET;
@@ -70,7 +69,9 @@ const middleware = co.wrap(function *(ctx, next) {
       };
     }
     ctx.request.token = token;
-    next();
+    ctx.request.decoded = result;
+    console.log('--- go to next ---');
+    return next();
 
   } else {
     ctx.response.status = 400;
@@ -78,12 +79,13 @@ const middleware = co.wrap(function *(ctx, next) {
       status: 400,
       text: "ログインしてください"
     };
+    return next();
   }
 });
 
 const sign = function (target, opts) {
   let options = opts || {
-    expiresIn: 60*60*24
+    expiresIn: 0
   };
   console.log(options);
   return jwtSign(target, secret, options);

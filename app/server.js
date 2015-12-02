@@ -4,7 +4,7 @@ const Koa = require('koa');
 const app = module.exports = new Koa();
 const constants = require('./lib/constants');
 const serve = require('./lib/serve');
-const router = require('./lib/router');
+const apiRouter = require('./router').api;
 const session = require('./lib/session');
 const bodyParser = require('koa-bodyparser');
 const cors = require('kcors');
@@ -30,6 +30,6 @@ app
   .use(convert(session))
   .use(passport.initialize())
   .use(passport.session())
-  .use(router.routes())
-  .use(router.allowedMethods())
+  .use(apiRouter.routes())
+  .use(apiRouter.allowedMethods())
   .listen(constants.PORT);
