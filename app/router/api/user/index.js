@@ -1,8 +1,8 @@
 "use strict";
 
 const Router = require('koa-router');
-const api = require(`${process.cwd()}/app/controller/api/`);
-const authCheck = require(`${process.cwd()}/app/lib/auth.js`).middleware;
+const api = require(`${process.cwd()}/controller/api/`);
+const authCheck = require(`${process.cwd()}/lib/auth.js`).middleware;
 const user = new Router({
   prefix: `/user`
 });

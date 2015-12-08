@@ -1,9 +1,9 @@
 "use strict";
 
-const UserModel = require(`${process.cwd()}/app/model/user`);
+const UserModel = require(`${process.cwd()}/model/user`);
 const jsonify = JSON.stringify;
-const passport = require(`${process.cwd()}/app/lib/auth.js`).passport;
-const sign = require(`${process.cwd()}/app/lib/auth.js`).sign;
+const passport = require(`${process.cwd()}/lib/auth.js`).passport;
+const sign = require(`${process.cwd()}/lib/auth.js`).sign;
 const co = require('co');
 
 exports.login = co.wrap(function *(ctx, next) {
@@ -24,7 +24,7 @@ exports.login = co.wrap(function *(ctx, next) {
       status: 200,
       text: "ログイン成功",
       data: {
-        id: user._id,
+        id: user.id,
         name: user.name,
         created: user.created
       },
@@ -47,9 +47,14 @@ exports.logout = (ctx, next) => {
 };
 
 exports.checkAuth = (ctx, next) => {
+  let request = ctx.request;
+  console.log(request.decoded);
   return ctx.body = {
     status: 200,
     text: "OK",
-    data: ctx.request.token
+    data: {
+      user_id: request.decoded._id
+    },
+    token: request.token
   };
 };

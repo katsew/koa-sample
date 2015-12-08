@@ -1,16 +1,16 @@
 {
   "apps" : [{
-    "name"        : "koa-sample",
-    "script"      : "./app/server.js",
+    "name"        : "koa-app-server",
+    "script"      : "index.js",
     "args"        : [],
     "watch"       : true,
     "autorestart"   : true,
     "node_args"   : "",
     "merge_logs"  : false,
-    "cwd"         : "./",
+    "cwd"         : "./app",
     "env": {
       "NODE_ENV": "development",
-      "PORT": "3000",
+      "PORT": "3003",
       "MONGO_HOST": "localhost",
       "MONGO_PORT": "27017",
       "DEBUG": "*:*"
@@ -19,8 +19,34 @@
     "watch_options": {
       "usePolling": false
     },
+    "exec_mode": "fork_mode",
     "error_file": "./log/error.log",
     "out_file": "./log/output.log",
     "pid_file": "./pids/app.pid"
+  },
+  {
+    "name"        : "koa-mock-server",
+    "script"      : "index.js",
+    "args"        : [],
+    "watch"       : true,
+    "autorestart"   : true,
+    "node_args"   : "",
+    "merge_logs"  : false,
+    "cwd"         : "./mock",
+    "env": {
+      "NODE_ENV": "development",
+      "PORT": "3333",
+      "MONGO_HOST": "localhost",
+      "MONGO_PORT": "27017",
+      "DEBUG": "*:*"
+    },
+    "ignore_watch": ["node_modules", "log", "assets", "pids", "\.git\/", "test", "package.json"],
+    "watch_options": {
+      "usePolling": false
+    },
+    "exec_mode": "fork_mode",
+    "error_file": "./log/error.log",
+    "out_file": "./log/output.log",
+    "pid_file": "./pids/mock.pid"
   }]
 }

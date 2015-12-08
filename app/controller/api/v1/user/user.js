@@ -1,8 +1,8 @@
 "use strict";
 
-const UserModel = require(`${process.cwd()}/app/model/user`);
+const UserModel = require(`${process.cwd()}/model/user`);
 const jsonify = JSON.stringify;
-const sign = require(`${process.cwd()}/app/lib/auth.js`).sign;
+const sign = require(`${process.cwd()}/lib/auth.js`).sign;
 const co = require('co');
 
 exports.create = co.wrap(function *(ctx, next) {

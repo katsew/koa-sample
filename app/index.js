@@ -1,4 +1,4 @@
-// "use strict";
+"use strict";
 
 const Koa = require('koa');
 const app = module.exports = new Koa();
@@ -15,17 +15,14 @@ const co = require('co');
 // Initialize and registar middleware.
 app.keys = ["koa-session-cookie"];
 app.name = "koa-server";
-// app.proxy = true;
 app.on("error", function (err, ctx) {
   console.log(err);
   console.log(ctx);
 });
-
 app
   .use(convert(cors({
     origin: "*"
   })))
-  .use(convert(serve))
   .use(bodyParser())
   .use(convert(session))
   .use(passport.initialize())

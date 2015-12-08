@@ -2,7 +2,7 @@
 
 const API_VERSION = "v1";
 const Router = require('koa-router');
-const api = require(`${process.cwd()}/app/controller/api/`);
+const api = require(`${process.cwd()}/controller/api/`);
 const user = require('./user');
 const auth = require('./auth');
 
