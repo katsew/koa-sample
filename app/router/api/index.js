@@ -9,14 +9,6 @@ const auth = require('./auth');
 const router = new Router({
   prefix: `/api/${API_VERSION}`
 });
-const authCheck = require(`${process.cwd()}/app/lib/auth.js`).middleware;
-router.get(`/check_token`, authCheck, function(ctx, next) {
-  return ctx.body = {
-    status: 200,
-    text: "OK",
-    data: ctx.request.token
-  };
-});
 
 router.use(user.routes(), user.allowedMethods());
 router.use(auth.routes(), auth.allowedMethods());

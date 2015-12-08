@@ -45,3 +45,11 @@ exports.logout = (ctx, next) => {
     text: "ログアウト成功"
   });
 };
+
+exports.checkAuth = (ctx, next) => {
+  return ctx.body = {
+    status: 200,
+    text: "OK",
+    data: ctx.request.token
+  };
+};
