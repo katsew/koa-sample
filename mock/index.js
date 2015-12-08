@@ -12,7 +12,7 @@ const router = new Router({
 });
 router.get('/start', endpoint.start);
 router.get('/login', endpoint.login);
-
+router.get('/registar', endpoint.registar);
 
 app
   .use(convert(cors({
