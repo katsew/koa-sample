@@ -50,7 +50,8 @@ exports.create = co.wrap(function *(ctx, next) {
   return ctx.body = jsonify({
     status: 200,
     text: "ユーザー登録成功",
-    data: result
+    data: result,
+    token: sign(result)
   });
 });
 
