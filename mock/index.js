@@ -2,13 +2,22 @@
 
 const Koa = require('koa');
 const app = new Koa();
-const server = require('http').createServer(app.callback());
-const io = require('socket.io')(server);
+const cors = require('kcors');
+const convert = require('koa-convert');
 const endpoint = require(`${process.cwd()}/service/log`);
-io.on('connection', (socket) => {
-  console.log('--- connected to the server ---');
-  socket.on('log:start', endpoint.start);
-  socket.on('log:login', endpoint.login);
-});
 
-server.listen(3333);
+const Router = require('koa-router');
+const router = new Router({
+  prefix: '/log'
+});
+router.get('/start', endpoint.start);
+router.get('/login', endpoint.login);
+
+
+app
+  .use(convert(cors({
+    origin: "*"
+  })))
+  .use(router.routes())
+  .use(router.allowedMethods())
+  .listen(3333);
