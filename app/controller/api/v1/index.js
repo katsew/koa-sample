@@ -1,4 +1,5 @@
 module.exports = {
   auth: require('./auth'),
-  user: require('./user')
+  user: require('./user'),
+  kpi: require('./kpi')
 };
