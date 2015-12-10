@@ -8,5 +8,6 @@ const kpi = new Router({
 });
 kpi.get(`/game_list`, authCheck, api.kpi.collection.getGameList);
 kpi.get(`/type_list`, authCheck, api.kpi.collection.getTypeList);
+kpi.get(`/analytics`, authCheck, api.kpi.query.getAnalytics);
 
 module.exports = kpi;

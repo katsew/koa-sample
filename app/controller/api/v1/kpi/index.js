@@ -1,3 +1,4 @@
 module.exports = {
-  collection: require('./collection')
+  collection: require('./collection'),
+  query: require('./query')
 };
