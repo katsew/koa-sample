@@ -26,6 +26,7 @@
     "koa-redis": "^1.0.1",
     "koa-router": "^7.0.0",
     "koa-static": "^1.5.2",
+    "moment": "^2.10.6",
     "mongoose": "^4.2.7",
     "nodemailer": "^1.10.0",
     "passport-local": "^1.0.0",
@@ -33,6 +34,7 @@
     "uuid": "^2.0.1"
   },
   "devDependencies": {
+    "faker": "^3.0.1",
     "mocha": "^2.3.4",
     "supertest": "^1.1.0"
   }
