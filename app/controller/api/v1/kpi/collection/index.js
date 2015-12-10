@@ -36,6 +36,8 @@ exports.getGameList = co.wrap(function *(ctx, next) {
   });
   console.log('--- yield end ---');
 });
+
+
 exports.getTypeList = co.wrap(function *(ctx, next) {
   console.log(ctx.req.headers['x-access-name']);
   let database;
@@ -67,6 +69,7 @@ exports.getTypeList = co.wrap(function *(ctx, next) {
     }
   }).then(co.wrap(function *() {
     let cols = yield database.db.collections();
+    console.log(cols);
     let collections = cols.map((item) => {
       return item.s.name;
     }).filter((item) => {
