@@ -29,7 +29,7 @@
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "mongoose": "^4.2.7",
-    "nodemailer": "^1.10.0",
+    "nodemailer": "^6.4.16",
     "passport-local": "^1.0.0",
     "pm2": "^0.15.10",
     "uuid": "^2.0.1"
